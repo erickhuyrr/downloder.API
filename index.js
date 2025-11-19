@@ -17,7 +17,6 @@ app.use("/api/dailymotion", require("./routes/dailymotion"));
 app.use("/api/douyin", require("./routes/douyin"));
 app.use("/api/kuaishou", require("./routes/kuaishou"));
 app.use("/api/linkedin", require("./routes/linkedin"));
-app.use("/api/youtube", require("./routes/youtube"));
 app.use("/api/meta", require("./routes/facebookInsta"));
 app.use("/api/pinterest", require("./routes/pinterest"));
 app.use("/api/reddit", require("./routes/reddit"));
@@ -41,7 +40,6 @@ const endpoints = [
   "/api/meta",
   "/api/pinterest",
   "/api/reddit",
-  "/api/youtube",
   "/api/snapchat",
   "/api/spotify",
   "/api/soundcloud",
