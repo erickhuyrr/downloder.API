@@ -25,7 +25,7 @@ app.use("/api/threads", require("./routes/threads"));
 app.use("/api/tiktok", require("./routes/tiktok"));
 app.use("/api/tumblr", require("./routes/tumblr"));
 app.use("/api/twitter", require("./routes/twitter"));
-app.use("/api/youtube", require("./routes/youtube"));
+app.use("/api/mp3", require("./routes/mp3"));
 
 const endpoints = [
   "/api/bluesky",
@@ -45,6 +45,7 @@ const endpoints = [
   "/api/tumblr",
   "/api/twitter",
   "/api/youtube",
+  "/api/mp3",
 ];
 
 app.get("/", (req, res) => {
