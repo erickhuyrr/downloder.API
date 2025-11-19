@@ -1,4 +1,4 @@
-const { fetchYouTubeData } = require("../services/mp3Service");
+const { fetchMP3Data } = require("../services/mp3Service");
 
 async function handleYouTubeDownload(req, res) {
   try {
@@ -18,4 +18,4 @@ async function handleYouTubeDownload(req, res) {
   }
 }
 
-module.exports = { handleYouTubeDownload };
+module.exports = { handleMP3Download };
