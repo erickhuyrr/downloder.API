@@ -1,6 +1,6 @@
 const { fetchMP3Data } = require("../services/mp3Service");
 
-async function handleYouTubeDownload(req, res) {
+async function handleMP3Download(req, res) {
   try {
     const { url } = req.query;
 
@@ -10,7 +10,7 @@ async function handleYouTubeDownload(req, res) {
         .json({ success: false, error: "Missing 'url' query parameter." });
     }
 
-    const data = await fetchYouTubeData(url);
+   const data = await fetchMP3Data(url);
     res.json({ success: true, data });
 
   } catch (error) {
