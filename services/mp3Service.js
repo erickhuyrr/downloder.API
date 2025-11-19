@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-async function fetchYouTubeData(url) {
+async function fetchMP3Data(url) {
   try {
     const res = await axios.get(
       "https://api.vidfly.ai/api/media/youtube/download",
@@ -41,8 +41,8 @@ async function fetchYouTubeData(url) {
     };
 
   } catch (err) {
-    throw new Error(`YouTube downloader request failed: ${err.message}`);
+    throw new Error(`MP3 downloader request failed: ${err.message}`);
   }
 }
 
-module.exports = { fetchYouTubeData };
+module.exports = { fetchMP3Data };
