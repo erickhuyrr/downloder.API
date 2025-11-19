@@ -7,10 +7,10 @@ async function handleMP3Download(req, res) {
     if (!url) {
       return res
         .status(400)
-        .json({ success: false, error: "Missing 'url' query parameter." });
+        .json({ success: false, error: "Missing 'url' parameter." });
     }
 
-   const data = await fetchMP3Data(url);
+    const data = await fetchMP3Data(url);
     res.json({ success: true, data });
 
   } catch (error) {
