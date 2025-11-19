@@ -41,7 +41,7 @@ async function fetchMP3Data(url) {
     };
 
   } catch (err) {
-    throw new Error(`MP3 downloader request failed: ${err.message}`);
+    throw new Error(`MP3 request failed: ${err.message}`);
   }
 }
 
