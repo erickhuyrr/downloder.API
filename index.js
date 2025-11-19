@@ -27,9 +27,9 @@ app.use("/api/threads", require("./routes/threads"));
 app.use("/api/tiktok", require("./routes/tiktok"));
 app.use("/api/tumblr", require("./routes/tumblr"));
 app.use("/api/twitter", require("./routes/twitter"));
-app.use("/api/mp3", require("./routes/mp3")); // FIXED
+app.use("/api/mp3", require("./routes/mp3"));
 
-// Available endpoints (auto-generated)
+// Available endpoints
 const endpoints = [
   "/api/bluesky",
   "/api/capcut",
@@ -47,7 +47,7 @@ const endpoints = [
   "/api/tiktok",
   "/api/tumblr",
   "/api/twitter",
-  "/api/mp3" // FIXED — removed /api/youtube
+  "/api/mp3"
 ];
 
 // Root Route
@@ -69,7 +69,7 @@ app.use((req, res) => {
 
 // 500 Error Handler
 app.use((err, req, res, next) => {
-  console.error("❌ Error:", err.message);
+  console.error("❌ Error:", err.stack || err.message);
   res.status(500).json({
     success: false,
     error: "Internal Server Error"
