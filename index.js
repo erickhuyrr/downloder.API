@@ -27,33 +27,34 @@ app.use("/api/threads", require("./routes/threads"));
 app.use("/api/tiktok", require("./routes/tiktok"));
 app.use("/api/tumblr", require("./routes/tumblr"));
 app.use("/api/twitter", require("./routes/twitter"));
-
-// Available endpoints
-const endpoints = [
-  "/api/bluesky",
-  "/api/capcut",
-  "/api/dailymotion",
-  "/api/douyin",
-  "/api/kuaishou",
-  "/api/linkedin",
-  "/api/meta",
-  "/api/pinterest",
-  "/api/reddit",
-  "/api/snapchat",
-  "/api/spotify",
-  "/api/soundcloud",
-  "/api/threads",
-  "/api/tiktok",
-  "/api/tumblr",
-  "/api/twitter",
-];
+// 🔥 New audio extractor route
+app.use("/api/audio", require("./routes/audio"));
 
 // Root Route
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
     author: "ASMIT ADK",
-    endpoints
+    endpoints: [
+      "/api/audio/extract",
+      "/api/bluesky",
+      "/api/capcut",
+      "/api/dailymotion",
+      "/api/douyin",
+      "/api/kuaishou",
+      "/api/linkedin",
+      "/api/meta",
+      "/api/pinterest",
+      "/api/reddit",
+      "/api/snapchat",
+      "/api/spotify",
+      "/api/soundcloud",
+      "/api/threads",
+      "/api/tiktok",
+      "/api/tumblr",
+      "/api/twitter",
+      "/api/audio,
+    ]
   });
 });
 
@@ -65,7 +66,7 @@ app.use((req, res) => {
   });
 });
 
-// 500 Error Handler
+// 500 Handler
 app.use((err, req, res, next) => {
   console.error("❌ Error:", err.stack || err.message);
   res.status(500).json({
