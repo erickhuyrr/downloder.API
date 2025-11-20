@@ -26,14 +26,14 @@ app.use("/api/soundcloud", require("./routes/soundcloud"));
 app.use("/api/threads", require("./routes/threads"));
 app.use("/api/tiktok", require("./routes/tiktok"));
 app.use("/api/tumblr", require("./routes/tumblr"));
-app.use("/api/twitter", require("./routes/twitter"));
+app.use("/api/youtube", require("./routes/youtube"));
 // Root Route
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
     author: "ASMIT ADK",
     endpoints: [
-      "/api/audio/extract",
+      "/api/youtube",
       "/api/bluesky",
       "/api/capcut",
       "/api/dailymotion",
