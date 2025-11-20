@@ -27,8 +27,6 @@ app.use("/api/threads", require("./routes/threads"));
 app.use("/api/tiktok", require("./routes/tiktok"));
 app.use("/api/tumblr", require("./routes/tumblr"));
 app.use("/api/twitter", require("./routes/twitter"));
-// 🔥 New audio extractor route 
-app.use("/api/audio", require("./routes/audio"));
 // Root Route
 app.get("/", (req, res) => {
   res.status(200).json({
