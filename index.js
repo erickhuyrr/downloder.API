@@ -27,7 +27,6 @@ app.use("/api/threads", require("./routes/threads"));
 app.use("/api/tiktok", require("./routes/tiktok"));
 app.use("/api/tumblr", require("./routes/tumblr"));
 app.use("/api/twitter", require("./routes/twitter"));
-app.use("/api/mp3", require("./routes/mp3"));
 
 // Available endpoints
 const endpoints = [
@@ -47,7 +46,6 @@ const endpoints = [
   "/api/tiktok",
   "/api/tumblr",
   "/api/twitter",
-  "/api/mp3"
 ];
 
 // Root Route
