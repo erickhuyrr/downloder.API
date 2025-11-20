@@ -27,7 +27,6 @@ app.use("/api/threads", require("./routes/threads"));
 app.use("/api/tiktok", require("./routes/tiktok"));
 app.use("/api/tumblr", require("./routes/tumblr"));
 app.use("/api/twitter", require("./routes/twitter"));
-// 🔥 New audio extractor route
 app.use("/api/audio", require("./routes/audio"));
 
 // Root Route
@@ -53,7 +52,7 @@ app.get("/", (req, res) => {
       "/api/tiktok",
       "/api/tumblr",
       "/api/twitter",
-      "/api/audio,
+      "/api/audio"
     ]
   });
 });
@@ -75,8 +74,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+// ⛔ REMOVE app.listen for Vercel
+// module.exports is required by Vercel
+module.exports = app;
