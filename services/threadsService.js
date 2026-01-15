@@ -1,38 +1,97 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-async function threadsDownloader(url) {
-  try {
-    const res = await axios.post(
-      "https://threadsv.com/get-thr",
-      {
-        token: "29ae809a4f98ebee39d8d683f851fc86",
-        url,
-        lang: "en",
-      },
-      {
-        headers: {
-          "content-type": "application/json",
-          referer: "https://threadsv.com/",
-          "user-agent": "Mozilla/5.0",
-          cookie: "PHPSESSID=l7cec5kqiqlt2mce3q03in0jo9",
-        },
-      }
-    );
+async function threadsDownloader(postUrl) {
+  const endpoint = "https://lovethreads.net/api/ajaxSearch";
 
-    if (!res.data || !res.data.html) {
-      throw new Error("No HTML in response from threadsv.com");
+  const form = new URLSearchParams({
+    q: postUrl,
+    t: "media",
+    lang: "en",
+  });
+
+  const { data } = await axios.post(endpoint, form.toString(), {
+    headers: {
+      "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      origin: "https://lovethreads.net",
+      referer: "https://lovethreads.net/en",
+      "x-requested-with": "XMLHttpRequest",
+    },
+  });
+
+  if (data.status !== "ok") throw new Error("Failed");
+
+  const $ = cheerio.load(data.data);
+
+  const photos = [];
+  const videos = [];
+
+  $(".download-box > li").each((index, li) => {
+    const item = $(li);
+
+    /* ───────────── PHOTO ───────────── */
+    if (item.find(".icon-dlimage").length) {
+      const thumbnail = item
+        .find(".download-items__thumb img")
+        .attr("src");
+
+      const variants = [];
+
+      item.find(".photo-option option").each((_, opt) => {
+        const url = $(opt).attr("value");
+        const label = $(opt).text().trim();
+
+        if (!url || !label.includes("x")) return;
+
+        const [width, height] = label.split("x").map(Number);
+
+        variants.push({
+          resolution: label,
+          width,
+          height,
+          url,
+        });
+      });
+
+      variants.sort(
+        (a, b) => b.width * b.height - a.width * a.height
+      );
+
+      photos.push({
+        index: photos.length + 1,
+        thumbnail,
+        variants,
+      });
     }
 
-    const $ = cheerio.load(res.data.html);
-    const download = $(".btn.download-btn").attr("href");
-    const thumbnail = $(".thumb img").attr("src");
-    const quality = $(".btn.download-btn .tag").text().trim() || "Unknown";
+    /* ───────────── VIDEO ───────────── */
+    if (item.find(".icon-dlvideo").length) {
+      const thumbnail = item
+        .find(".download-items__thumb img")
+        .attr("src");
 
-    return { download, thumbnail, quality };
-  } catch (err) {
-    throw new Error(err.message);
-  }
+      const videoUrl = item
+        .find('a[title="Download Video"]')
+        .attr("href");
+
+      if (!videoUrl) return;
+
+      videos.push({
+        index: videos.length + 1,
+        thumbnail,
+        url: videoUrl,
+        format: "mp4",
+      });
+    }
+  });
+
+  return {
+    platform: "threads",
+    photoCount: photos.length,
+    videoCount: videos.length,
+    photos,
+    videos,
+  };
 }
 
 module.exports = threadsDownloader;
