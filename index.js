@@ -52,9 +52,9 @@ const endpoints = [
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
-    author: "Milan Bhandari",
-    contact: "https://www.milanb.com.np/",
-    message: "Universal Downloader API is running",
+    author: "ASMIT ADK",
+    contact: "https://www.aabishkar1.com.np/",
+    message: "Downloader API is running",
     endpoints,
   });
 });
